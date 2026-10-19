@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda Lula 13 – Alagoas</title>
+<meta name="description" content="Agenda diária das ações da militância Lula 13 em Alagoas: horários, locais e cidades.">
+<meta property="og:title" content="O Time Tá na Rua – Agenda Lula 13 em Alagoas">
+<meta property="og:description" content="Confira onde a militância vai estar hoje: horários, locais e cidades.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#d4121a">
+<link rel="icon" href="imagens/logo_pt_alagoas_maceio.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Montserrat:wght@800;900&family=Sora:wght@400;600;700;800&family=Unbounded:wght@800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vermelho: #d4121a;
+    --vermelho-esc: #a90b12;
+    --verde: #22c33a;
+    --azul: #1565e0;
+    --amarelo: #fff200;
+    --ouro: #ffd400;
+    --creme: #fbf7ee;
+    --roxo: #5b1fa8;
+    --rosa: #ff1fa0;
+    --ciano: #54e3ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Sora', system-ui, sans-serif; color: #fff; min-height: 100vh;
+    background:
+      linear-gradient(115deg, rgba(255,120,30,.35) 0%, rgba(255,80,20,0) 35%),
+      linear-gradient(180deg, #e8191e 0%, #d4121a 50%, #b90c13 100%) fixed;
+    background-color: var(--vermelho);
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  .dia > *, .ev > *, .ev .linha > * { min-width: 0; }
+  .ev .local, .ev .nome { overflow-wrap: anywhere; }
+  .faixa { display: flex; height: 8px; }
+  .faixa i { flex: 1; }
+  .faixa i:nth-child(1) { background: var(--azul); }
+  .faixa i:nth-child(2) { background: #12a83a; }
+  .faixa i:nth-child(3) { background: var(--ouro); }
+  .faixa i:nth-child(4) { background: #12a83a; }
+
+  /* ---------- topo ---------- */
+  .hero { position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: url('imagens/capa.jpg') center 60%/cover no-repeat;
+    -webkit-mask-image: linear-gradient(180deg, #000 40%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 40%, transparent 100%);
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(212,18,26,.15) 0%, rgba(212,18,26,.55) 55%, var(--vermelho) 100%);
+  }
+  .hero-in { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 28px 16px 40px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .hero h1 { width: min(520px, 100%); }
+  .hero h1 img { width: 100%; filter: drop-shadow(0 8px 14px rgba(0,0,0,.3)); }
+  .hero-txt { max-width: 340px; font-weight: 600; font-size: 17px; line-height: 1.45; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+  .hero-txt strong { font-weight: 800; }
+  .atualizado { display: inline-block; margin-top: 12px; background: rgba(0,0,0,.25); padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+
+  main { max-width: 1040px; margin: 0 auto; padding: 0 16px 40px; }
+
+  /* ---------- filtro ---------- */
+  .filtro { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 4px 0 28px; }
+  .filtro span { font-weight: 700; font-size: 14px; margin-right: 4px; }
+  .chip { border: 0; cursor: pointer; font: 700 14px 'Sora', sans-serif; padding: 9px 16px; border-radius: 999px;
+    background: rgba(255,255,255,.14); color: #fff; transition: background .15s, transform .15s; }
+  .chip:hover { background: rgba(255,255,255,.24); }
+  .chip[aria-pressed="true"] { background: var(--amarelo); color: var(--vermelho); }
+  .chip:focus-visible, .btn:focus-visible { outline: 3px solid var(--ciano); outline-offset: 2px; }
+
+  /* ---------- agenda do dia ---------- */
+  .secao-titulo { font-family: 'Archivo Black', sans-serif; font-size: 22px; letter-spacing: .5px; margin: 8px 0 16px;
+    display: flex; align-items: center; gap: 12px; }
+  .secao-titulo::after { content: ""; flex: 1; height: 3px; background: rgba(255,255,255,.25); border-radius: 3px; }
+
+  .dia { display: grid; grid-template-columns: 170px 1fr 220px; gap: 22px; align-items: start;
+    background: rgba(0,0,0,.14); border-radius: 22px; padding: 22px; margin-bottom: 26px; }
+  .dia.passado { opacity: .82; }
+
+  .selo { text-align: center; position: relative; }
+  .selo .tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--verde); color: #fff;
+    font: 800 12px 'Sora', sans-serif; padding: 4px 10px; border-radius: 999px; white-space: nowrap; box-shadow: 0 3px 8px rgba(0,0,0,.25); z-index: 2; }
+  .selo .tag.hoje { background: var(--ouro); color: var(--vermelho); }
+  .selo .topo { background: var(--ouro); color: var(--vermelho); font-family: 'Archivo Black', sans-serif; font-size: 18px; padding: 12px 0 8px; border-radius: 14px 14px 0 0; }
+  .selo .corpo { background: var(--azul); border: 2px solid var(--ouro); border-top: 0; border-radius: 0 0 22px 22px; padding: 8px 0 14px; box-shadow: 0 8px 18px rgba(0,0,0,.25); }
+  .selo .d { font-family: 'Anton', sans-serif; font-size: 38px; line-height: 1; }
+  .selo .n { font-family: 'Anton', sans-serif; color: #ffe600; font-size: 104px; line-height: .9; letter-spacing: -2px; margin-bottom: 2px; }
+  .selo .s { font-family: 'Unbounded', sans-serif; font-weight: 800; color: var(--ciano); font-size: 15px; }
+  .selo .m { font: 700 13px 'Sora', sans-serif; margin-top: 8px; opacity: .9; }
+
+  .eventos { display: flex; flex-direction: column; gap: 14px; list-style: none; }
+  .ev { display: grid; grid-template-columns: 96px 1fr; grid-template-rows: auto auto; }
+  .ev .hora { grid-row: 1; grid-column: 1; background: var(--verde); border-radius: 12px; font: 900 26px 'Montserrat', sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 8px 0; box-shadow: 0 3px 8px rgba(0,0,0,.18); z-index: 1; }
+  .ev .nome { grid-row: 1; grid-column: 2; background: var(--creme); color: var(--vermelho); font-weight: 700; font-size: 19px; line-height: 1.2;
+    padding: 10px 16px 10px 22px; margin-left: -12px; border-radius: 0 12px 12px 0; display: flex; align-items: center; }
+  .ev .linha { grid-row: 2; grid-column: 2; display: flex; margin-top: 6px; }
+  .ev .lbl { background: var(--azul); font-weight: 700; font-size: 13px; padding: 8px 12px; border-radius: 8px 0 0 8px; display: flex; align-items: center; }
+  .ev .local { flex: 1; background: var(--amarelo); color: var(--vermelho); font-weight: 700; font-size: 15px; line-height: 1.25; padding: 8px 14px; display: flex; align-items: center; }
+  .ev .cid { font-weight: 800; font-size: 13px; text-transform: uppercase; padding: 8px 14px; border-radius: 0 8px 8px 0; display: flex; align-items: center; white-space: nowrap; }
+  .roxo { background: var(--roxo); } .rosa { background: var(--rosa); }
+
+  .card-lado { display: flex; flex-direction: column; gap: 10px; }
+  .card-lado button.mini { border: 0; padding: 0; background: none; cursor: zoom-in; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,.3); }
+  .card-lado button.mini img { transition: transform .25s; }
+  .card-lado button.mini:hover img { transform: scale(1.03); }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border: 0; cursor: pointer;
+    font: 700 14px 'Sora', sans-serif; padding: 11px 12px; border-radius: 10px; transition: filter .15s; }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.zap { background: #25d366; color: #063; }
+  .btn.baixar { background: #fff; color: var(--vermelho); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+
+  .vazio { text-align: center; padding: 40px 16px; background: rgba(0,0,0,.14); border-radius: 22px; font-weight: 600; }
+
+  details.anteriores { margin-top: 10px; }
+  details.anteriores summary { cursor: pointer; list-style: none; }
+  details.anteriores summary::-webkit-details-marker { display: none; }
+  details.anteriores summary .secao-titulo::before { content: "▸"; transition: transform .2s; display: inline-block; }
+  details.anteriores[open] summary .secao-titulo::before { transform: rotate(90deg); }
+
+  /* ---------- rodapé ---------- */
+  footer { text-align: center; padding: 30px 16px 26px; }
+  .logos { display: flex; justify-content: center; align-items: center; gap: 36px; flex-wrap: wrap; }
+  .logos .lula { height: 96px; }
+  .logos .pt { height: 92px; }
+  footer p { margin-top: 18px; font-size: 13px; opacity: .85; }
+
+  /* ---------- visualizador do card ---------- */
+  .lightbox { position: fixed; inset: 0; background: rgba(20,0,0,.88); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+  .lightbox.aberto { display: flex; }
+  .lightbox img { max-height: 92vh; width: auto; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+  .lightbox button { position: absolute; top: 14px; right: 16px; width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
+    background: #fff; color: var(--vermelho); font: 800 22px 'Sora', sans-serif; }
+
+  /* ---------- telas menores ---------- */
+  @media (max-width: 900px) {
+    .dia { grid-template-columns: 140px 1fr; }
+    .card-lado { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+    .card-lado button.mini { width: 120px; flex: none; }
+    .card-lado .acoes { flex: 1; display: flex; flex-direction: column; gap: 10px; justify-content: center; min-width: 180px; }
+    .selo .n { font-size: 88px; }
+  }
+  @media (max-width: 620px) {
+    .hero-in { padding-top: 20px; }
+    .hero-txt { font-size: 15px; }
+    .dia { grid-template-columns: 1fr; padding: 18px 14px; }
+    .selo { display: flex; align-items: stretch; max-width: 100%; }
+    .selo .topo { writing-mode: vertical-rl; transform: rotate(180deg); border-radius: 0 14px 14px 0; padding: 10px 8px; font-size: 14px; }
+    .selo .corpo { flex: 1; display: flex; align-items: center; justify-content: center; gap: 12px; border: 2px solid var(--ouro); border-left: 0; border-radius: 0 18px 18px 0; padding: 10px; }
+    .selo .n { font-size: 70px; margin: 0; }
+    .selo .tag { top: -10px; }
+    .selo .m { margin-top: 0; }
+    .ev { grid-template-columns: 78px 1fr; }
+    .ev .hora { font-size: 21px; }
+    .ev .nome { font-size: 16px; padding: 8px 12px 8px 18px; }
+    .ev .linha { grid-column: 1 / -1; flex-wrap: wrap; }
+    .ev .lbl { font-size: 12px; }
+    .ev .local { font-size: 14px; }
+    .ev .cid { font-size: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<div class="faixa"><i></i><i></i><i></i><i></i></div>
+
+<header class="hero">
+  <div class="hero-in">
+    <h1><img src="imagens/titulo_time_na_rua.png" alt="O Time Tá na Rua"></h1>
+    <div class="hero-txt">
+      <p><strong>Agenda da militância Lula 13 em Alagoas.</strong> Veja onde a gente vai estar, em que horário e em qual cidade. Chega junto!</p>
+      <span class="atualizado" id="atualizado"></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="filtro" role="group" aria-label="Filtrar por cidade" id="filtro"></div>
+  <section id="proximas" aria-labelledby="t-prox"></section>
+  <details class="anteriores" id="anteriores" hidden>
+    <summary><h2 class="secao-titulo">AGENDAS ANTERIORES</h2></summary>
+    <div id="lista-anteriores"></div>
+  </details>
+</main>
+
+<footer>
+  <div class="logos">
+    <img class="lula" src="imagens/logo_lula13.png" alt="Presidente Lula 13 – Vice Alckmin">
+    <img class="pt" src="imagens/logo_pt_alagoas_maceio.png" alt="PT Alagoas e Maceió">
+  </div>
+  <p>PT Alagoas · PT Maceió</p>
+</footer>
+<div class="faixa"><i></i><i></i><i></i><i></i></div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Card da agenda">
+  <button type="button" aria-label="Fechar" id="fechar">✕</button>
+  <img alt="" id="lb-img">
+</div>
+
+<script src="agendas.js"></script>
+<script>
+(() => {
+  const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  const agendas = (window.AGENDAS || []).slice();
+  const hojeISO = (() => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); })();
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const partes = iso => { const [a,m,d] = iso.split('-').map(Number); return { a, m, d }; };
+
+  // cores das cidades: alterna roxo/rosa na ordem em que aparecem
+  const cidades = [];
+  agendas.forEach(ag => ag.eventos.forEach(e => { if (!cidades.includes(e.cidade)) cidades.push(e.cidade); }));
+  const corCidade = c => cidades.indexOf(c) % 2 === 0 ? 'roxo' : 'rosa';
+
+  const icoZap = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 11.5 11.5 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>';
+  const icoBaixar = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16"/></svg>';
+
+  function textoZap(ag) {
+    const { d, m } = partes(ag.data);
+    let t = `*AGENDA LULA 13 – ${ag.semana.toUpperCase()}, ${d} DE ${MESES[m-1].toUpperCase()}*\n\n`;
+    ag.eventos.forEach(e => { t += `🕘 *${e.hora}* – ${e.nome}\n📍 ${e.local} (${e.cidade})\n\n`; });
+    t += `Veja todas as agendas: ${location.href.split('#')[0]}`;
+    return 'https://wa.me/?text=' + encodeURIComponent(t);
+  }
+
+  function blocoDia(ag, filtro, tag) {
+    const eventos = ag.eventos.filter(e => !filtro || e.cidade === filtro);
+    if (!eventos.length) return '';
+    const { d, m } = partes(ag.data);
+    const passado = ag.data < hojeISO;
+    const nomeArq = `agenda-lula-${ag.data}.png`;
+    return `
+    <article class="dia${passado ? ' passado' : ''}" id="dia-${ag.data}">
+      <div class="selo">
+        ${tag ? `<span class="tag${tag === 'HOJE' ? ' hoje' : ''}">${tag}</span>` : ''}
+        <div class="topo">AGENDA DO</div>
+        <div class="corpo">
+          <div><div class="d">DIA</div><div class="n">${String(d).padStart(2,'0')}</div></div>
+          <div><div class="s">${esc(ag.semana.toUpperCase())}</div><div class="m">${MESES[m-1]}</div></div>
+        </div>
+      </div>
+      <ul class="eventos">
+        ${eventos.map(e => `
+        <li class="ev">
+          <span class="hora">${esc(e.hora)}</span>
+          <span class="nome">${esc(e.nome)}</span>
+          <span class="linha">
+            <span class="lbl">LOCAL:</span>
+            <span class="local">${esc(e.local)}</span>
+            <span class="cid ${corCidade(e.cidade)}">${esc(e.cidade)}</span>
+          </span>
+        </li>`).join('')}
+      </ul>
+      <div class="card-lado">
+        ${ag.card ? `<button class="mini" type="button" data-card="${esc(ag.card)}" aria-label="Ampliar card do dia ${d}">
+          <img src="${esc(ag.mini || ag.card)}" alt="Card da agenda de ${esc(ag.semana)}, dia ${d}" loading="lazy" width="540" height="675"></button>` : ''}
+        <div class="acoes">
+          <a class="btn zap" href="${textoZap(ag)}" target="_blank" rel="noopener">${icoZap} Mandar no WhatsApp</a>
+          ${ag.card ? `<a class="btn baixar" href="${esc(ag.card)}" download="${nomeArq}">${icoBaixar} Baixar o card</a>` : ''}
+        </div>
+      </div>
+    </article>`;
+  }
+
+  let filtroAtual = '';
+  function render() {
+    const futuras = agendas.filter(a => a.data >= hojeISO).sort((a,b) => a.data.localeCompare(b.data));
+    const passadas = agendas.filter(a => a.data < hojeISO).sort((a,b) => b.data.localeCompare(a.data));
+
+    let html = '';
+    futuras.forEach((ag, i) => {
+      const tag = ag.data === hojeISO ? 'HOJE' : (i === 0 ? 'PRÓXIMA' : '');
+      html += blocoDia(ag, filtroAtual, tag);
+    });
+    document.getElementById('proximas').innerHTML =
+      `<h2 class="secao-titulo" id="t-prox">PRÓXIMAS AGENDAS</h2>` +
+      (html || `<p class="vazio">${filtroAtual ? 'Nenhuma agenda marcada em ' + esc(filtroAtual) + ' por enquanto.' : 'A próxima agenda sai em breve. Volte mais tarde!'}</p>`);
+
+    const ant = passadas.map(ag => blocoDia(ag, filtroAtual, '')).join('');
+    const det = document.getElementById('anteriores');
+    det.hidden = !ant;
+    document.getElementById('lista-anteriores').innerHTML = ant;
+  }
+
+  // filtro por cidade
+  const f = document.getElementById('filtro');
+  f.innerHTML = '<span>Cidade:</span>' + ['Todas', ...cidades].map(c =>
+    `<button class="chip" type="button" data-cidade="${c === 'Todas' ? '' : esc(c)}" aria-pressed="${c === 'Todas'}">${esc(c)}</button>`).join('');
+  f.addEventListener('click', ev => {
+    const b = ev.target.closest('.chip'); if (!b) return;
+    filtroAtual = b.dataset.cidade;
+    f.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === b));
+    render();
+  });
+
+  // data da última atualização = agenda mais recente cadastrada
+  if (agendas.length) {
+    const ult = agendas.map(a => a.data).sort().pop();
+    const { d, m } = partes(ult);
+    document.getElementById('atualizado').textContent = `Atualizada com a agenda de ${d} de ${MESES[m-1]}`;
+  }
+
+  // visualizador do card
+  const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img');
+  let ultimoFoco = null;
+  document.addEventListener('click', ev => {
+    const b = ev.target.closest('button.mini'); if (!b) return;
+    ultimoFoco = b; lbImg.src = b.dataset.card; lbImg.alt = b.getAttribute('aria-label').replace('Ampliar ', '');
+    lb.classList.add('aberto'); document.getElementById('fechar').focus();
+  });
+  const fechar = () => { lb.classList.remove('aberto'); if (ultimoFoco) ultimoFoco.focus(); };
+  document.getElementById('fechar').addEventListener('click', fechar);
+  lb.addEventListener('click', ev => { if (ev.target === lb) fechar(); });
+  document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && lb.classList.contains('aberto')) fechar(); });
+
+  render();
+})();
+</script>
+</body>
+</html>
